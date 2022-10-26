@@ -1,0 +1,14 @@
+h1.todoCounter {
+  border-radius: 10px 10px 0 0;
+  font-family: 'Titillium Web', sans-serif;
+  text-align: center;
+  background: #272727;
+  color: #fff;
+  margin: 0;
+  padding: 30px 10px;
+  font-weight: normal;
+  box-shadow: inset 0px 32px 50px -31px rgba(255, 255, 255, 0.10);
+}
+
+
+  
