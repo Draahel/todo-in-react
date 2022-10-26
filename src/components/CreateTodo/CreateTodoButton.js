@@ -1,8 +1,9 @@
+
 import './createTodoButton.css'
 
-export const CreateTodoButton = () => {
+export const CreateTodoButton = (props) => {
     const createTodo = () => {
-        alert("Creando Todo")
+        props.setOpenModal(prevState => !prevState)
     }
     return(
         <>

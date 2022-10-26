@@ -12,6 +12,7 @@ const TodoProvider = (props) => {
   } = useLocalStorage('todoList',[])
 
   const [search, setSearch] = useState('');
+  const [ openModal, setOpenModal ] = useState(false)
 
   const completedTodos = todos.filter(todo => (todo.completed === true)).length
   const totalTodos = todos.length
@@ -25,6 +26,15 @@ const TodoProvider = (props) => {
       const searchText = search.toLowerCase();
       return todoText.includes(searchText);
     })
+  }
+
+  const addTodo = (text) =>{
+    const updatedTodos = [...todos];
+    updatedTodos.push({
+      completed: false,
+      title: text,
+    });
+    saveTodos(updatedTodos);
   }
 
   const onComplete = (title) => {
@@ -48,9 +58,12 @@ const TodoProvider = (props) => {
             completedTodos,
             search,
             setSearch,
+            openModal,
+            setOpenModal,
             todosFound,
             onComplete,
             onDelete,
+            addTodo,
         }}>
             {props.children}
         </TodoContex.Provider>
