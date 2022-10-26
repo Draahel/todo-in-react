@@ -1,3 +1,5 @@
+import { useContext } from "react"
+import { TodoContex } from "../../TodoContext"
 import { CreateTodoButton } from "../CreateTodo/CreateTodoButton"
 import { TodoCounter } from "../TodoCounter/TodoCounter"
 import { TodoItem } from "../TodoItem/TodoItem"
@@ -6,29 +8,17 @@ import { TodoSearch } from "../TodoSearch/TodoSearch"
 import './style.css'
 
 
-export const AppUI = (
-    {
-        totalTodos,
-        completedTodos,
-        search,
-        setSearch,
-        todosFound,
-        onComplete,
-        onDelete,
-    }
-)=>{
-
+export const AppUI = ()=>{
+    const {error,loading,todosFound,onComplete,onDelete} = useContext(TodoContex)
     return(
         <div id="container">
-            <TodoCounter
-                totalTodos = {totalTodos}
-                completedTodos = {completedTodos}
-            />
-            <TodoSearch 
-                search= {search}
-                setSearch= {setSearch}
-            />
+            <TodoCounter/>
+            <TodoSearch/>
+
             <TodoList>
+                {error && <p>Error al cargar los datos.</p>}
+                {loading && <p>Cargando datos...</p>}
+                {(!loading && !todosFound) && <p>Crea tu primera tarea.</p> }
                 {
                     todosFound.map((todo,index) => (
                         <TodoItem  
@@ -40,6 +30,7 @@ export const AppUI = (
                     ))
                 }
             </TodoList>
+
             <CreateTodoButton/>
             <div id="closer"></div>
         </div>
